@@ -3,13 +3,12 @@
 </h1>
 <p align="center">
     <br />
-        <img src="https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/12a6650c-213d-4e86-9c6a-5f9f6e4c9778" width="175" alt=""/></a>
+        <img src="https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/273f6ecc-8cb1-4d73-88d1-320513053c69" width="175" alt=""/></a>
     <br />
 </p>
 
 <p align="center"><strong>The first Clarity static analyser that finds bugs in your smart contracts
 </strong></p>
-
 
 
 
