@@ -1,5 +1,9 @@
 # Gecko-Clarity
-The first Clarity static analyser that finds bugs in your smart contracts
+
+
+<p align="center"><strong>The first Clarity static analyser that finds bugs in your smart contracts
+</strong></p>
+
 
 
 ### How Gecko's Static Analysis Works
