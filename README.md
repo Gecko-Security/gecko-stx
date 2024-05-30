@@ -10,7 +10,12 @@
 <p align="center"><strong>The first Clarity static analyser that finds bugs in your smart contracts
 </strong></p>
 
+### What is Gecko?
 
+
+### Images
+
+Demo: 
 
 ### How Gecko's Static Analysis Works
 1. We parse the Clarity code into a structure that Gecko can understand, this is called an Abstract Syntax Tree (AST). It represents the hirearchical structure of the code. We use the [Clarity Contract Analysis Crate](https://docs.rs/stacks-codec/latest/stacks_codec/clarity/vm/analysis/types/struct.ContractAnalysis.html), which converts Clarity code into an AST and other metadata. This is the main entrypoint for Gecko.
@@ -19,9 +24,9 @@
 4. As Gecko traverses the tree it propagates this taint to other nodes that depend on these.
 5. Once the traversal is complete messages are displayed about issues found including the location of the bug in source. 
 
-
-
-
-![AST](https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/b651810b-6db5-457c-88d1-7ee5feb6dc01)
-
+<p align="center">
+    <br />
+        <img src="https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/b651810b-6db5-457c-88d1-7ee5feb6dc01" width="225" alt=""/></a>
+    <br />
+</p>
 _Example of a traversal of AST_
