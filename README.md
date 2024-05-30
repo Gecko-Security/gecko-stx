@@ -15,8 +15,8 @@ Gecko is an open-source Clarity static analysis tool written in Rust. It detects
 
 ### Images
 
-Demo:
-Deck:
+- Demo:
+- Deck:
 
 ### How Gecko's Static Analysis Works
 1. We parse the Clarity code into a structure that Gecko can understand, this is called an Abstract Syntax Tree (AST). It represents the hirearchical structure of the code. We use the [Clarity Contract Analysis Crate](https://docs.rs/stacks-codec/latest/stacks_codec/clarity/vm/analysis/types/struct.ContractAnalysis.html), which converts Clarity code into an AST and other metadata. This is the main entrypoint for Gecko.
