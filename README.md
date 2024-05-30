@@ -1,7 +1,7 @@
 <p align="center">
     <br />
     <a href="https://cyfrin.io/">
-        <img src="https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/12a6650c-213d-4e86-9c6a-5f9f6e4c9778" width="145" alt=""/></a>
+        <img src="https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/12a6650c-213d-4e86-9c6a-5f9f6e4c9778" width="175" alt=""/></a>
     <br />
 </p>
 
