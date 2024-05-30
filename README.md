@@ -39,7 +39,7 @@ Currently Gecko only supports checking for unsafe inputs and for vulnearbilities
 
 ###  Vulnerability Detectors
 
-The following is a table of vulnearbility detectors supported by Gecko and future detectors that will be added when as the AST is impoved and dynamic analysis such as fuzzing is added. The aim is to create a set of real-life vulnearbilities and examples that will not only serve as a robust development template but also help identify good and bad parctices in Clarity contract development. The examples are taken from reported vulnerabilities and previous [audits](https://www.coinfabrik.com/smart-contract-audit-reports/). Contibution of adding new vulnearbilities or examples is welcome. 
+The following is a table of vulnearbility detectors supported by Gecko and future detectors that will be added when as the AST is impoved and dynamic analysis such as fuzzing is added. The aim is to create a set of real-life vulnearbilities and examples that will not only serve as a robust development template but also help identify good and bad parctices in Clarity contract development. Contibution of adding new vulnearbilities or examples is welcome. 
 
 
 | ✔️  | Vulnerability                                                                              | Example/Description                                                                                                                                                                                                                                                                                                                                                                                             |
