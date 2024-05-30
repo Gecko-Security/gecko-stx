@@ -26,7 +26,8 @@ Demo:
 
 <p align="center">
     <br />
-        <img src="https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/b651810b-6db5-457c-88d1-7ee5feb6dc01" width="225" alt=""/></a>
+        <img src="https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/b651810b-6db5-457c-88d1-7ee5feb6dc01" width="800" alt=""/></a>
     <br />
 </p>
+
 _Example of a traversal of AST_
