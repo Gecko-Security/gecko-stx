@@ -1,4 +1,4 @@
-<p align="center" style="font-size: 40px;">
+<p align="center" style="font-size: 200px;">
   <strong>GECKO</strong>
 </p>
 
