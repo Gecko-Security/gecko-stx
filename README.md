@@ -10,6 +10,7 @@
 <p align="center"><strong>The first Clarity static analyser that finds bugs in your smart contracts
 </strong></p>
 
+<img src="https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white" /> 
 
 
 ### How Gecko's Static Analysis Works
