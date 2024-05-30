@@ -1,6 +1,7 @@
-<p align="center" style="font-size: 200px;">
+<div align="center" style="font-size: 200px;">
   <strong>GECKO</strong>
-</p>
+</div>
+
 
 
 <p align="center">
