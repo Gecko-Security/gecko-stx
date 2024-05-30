@@ -18,6 +18,9 @@ Gecko is an open-source Clarity static analysis tool written in Rust. It detects
 - Demo:
 - Deck:
 
+### Features
+Currently Gecko only supports checking for unsafe inputs and for vulnearbilities that occur when `tx-sender` is used for authentication. These were chosen as they were the most common vulnearbilities that can be found in clarity contracts see this [report](https://www.coinfabrik.com/blog/tx-sender-in-clarity-smart-contracts-is-not-adviced/). The full list of vulnerabilities that will be added can be found [here](https://github.com/Gecko-Security/Gecko-Clarity/tree/main?tab=readme-ov-file#vulnerability-detectors). 
+
 ### How Gecko's Static Analysis Works
 1. We parse the Clarity code into a structure that Gecko can understand, this is called an Abstract Syntax Tree (AST). It represents the hirearchical structure of the code. We use the [Clarity Contract Analysis Crate](https://docs.rs/stacks-codec/latest/stacks_codec/clarity/vm/analysis/types/struct.ContractAnalysis.html), which converts Clarity code into an AST and other metadata. This is the main entrypoint for Gecko.
 2. We then define a struct called [Gecko](), which implements the [`ast_visitor`](https://doc.rust-lang.org/stable/nightly-rustc/rustc_ast/visit/trait.Visitor.html) crate used to traverse each node and understand the behavior of the code.
@@ -34,11 +37,7 @@ Gecko is an open-source Clarity static analysis tool written in Rust. It detects
 _Example of a traversal of AST_
 
 
-### Features
-Currently Gecko only supports checking for unsafe inputs and for vulnearbilities that occur when `tx-sender` is used for authentication. These were chosen as they were the most common vulnearbilities that can be found in clarity contracts see this [report](https://www.coinfabrik.com/blog/tx-sender-in-clarity-smart-contracts-is-not-adviced/). The full list of vulnerabilities that will be added can be found below: 
-
 ###  Vulnerability Detectors
-
 The following is a table of vulnearbility detectors supported by Gecko and future detectors that will be added when as the AST is impoved and dynamic analysis such as fuzzing is added. The aim is to create a set of real-life vulnearbilities and examples that will not only serve as a robust development template but also help identify good and bad parctices in Clarity contract development. Contibution of adding new vulnearbilities or examples is welcome. 
 
 
