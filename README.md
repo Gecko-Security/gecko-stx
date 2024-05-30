@@ -1,6 +1,6 @@
-<div align="center" style="font-size: 200px;">
+<h1 align="center" style="font-size: 200px;">
   <strong>GECKO</strong>
-</div>
+</h1>
 <p align="center">
     <br />
     <a href="https://cyfrin.io/">
