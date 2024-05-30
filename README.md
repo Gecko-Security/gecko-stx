@@ -34,7 +34,25 @@ _Example of a traversal of AST_
 
 
 ### Features
+Currently Gecko only supports checking for unsafe inputs and for vulnearbilities that occur when `tx-sender` is used for authentication. These were chosen as they were the most common vulnearbilities that can be found in clarity contracts see this [report](https://www.coinfabrik.com/blog/tx-sender-in-clarity-smart-contracts-is-not-adviced/). The full list of vulnerabilities that will be added can be found below: 
 
+- [x] authentication via `tx-sender` [reference](https://www.coinfabrik.com/blog/tx-sender-in-clarity-smart-contracts-is-not-adviced/)
+- [x] `stx-burn?`
+- [x] `stx-transfer?`
+- [ ] `ft-burn?`
+- [ ] `ft-mint?`
+- [ ]` ft-transfer?`
+- [ ] `nft-burn?`
+- [ ] `nft-mint?`
+- [ ] `nft-transfer?`
+- [ ] `map-delete?`
+- [ ] `map-insert?`
+- [ ] `map-set?`
+- [ ] `var-set?`
+- [ ] calls to private functions
+- [ ] return values
+- [ ] dynamic contract calls (through traits)
+- [ ] 
 
 
 ###  Vulnerability Detectors
