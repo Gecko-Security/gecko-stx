@@ -10,5 +10,8 @@ The first static analyser to detect vulnerabilities in clarity code
 5. Once the traversal is complete messages are displayed about issues found including the location of the bug in source. 
 
 
+
+
 ![AST](https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/b651810b-6db5-457c-88d1-7ee5feb6dc01)
+
 _Example of a traversal of AST_
