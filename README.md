@@ -41,7 +41,7 @@ Currently Gecko only supports checking for unsafe inputs and for vulnearbilities
 - [x] `stx-transfer?`
 - [ ] `ft-burn?`
 - [ ] `ft-mint?`
-- [ ]` ft-transfer?`
+- [ ] `ft-transfer?`
 - [ ] `nft-burn?`
 - [ ] `nft-mint?`
 - [ ] `nft-transfer?`
