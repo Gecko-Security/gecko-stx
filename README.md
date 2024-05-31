@@ -15,7 +15,7 @@ Gecko is an open-source Clarity static analysis tool written in Rust. It detects
 
 ### Images
 
-- Demo:
+- Demo: https://youtu.be/1UTiEWyAK4Q
 - Deck:
 
 ### Features
