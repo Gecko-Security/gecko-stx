@@ -23,6 +23,7 @@ Gecko is an open-source Clarity static analysis tool written in Rust. It current
 
 
 - Demo (finding vulnearbility in previous zest-protocol contract): https://youtu.be/1UTiEWyAK4Q
+- Deck:
 
 
 ### Features
