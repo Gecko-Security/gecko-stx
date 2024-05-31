@@ -3,12 +3,12 @@
 </h1>
 <p align="center">
     <br />
-        <img src="https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/273f6ecc-8cb1-4d73-88d1-320513053c69" width="225" alt=""/></a>
+        <img src="https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/dbb003a1-ea42-47d6-9d4a-edfb0684b7a7" width="225" alt=""/></a>
     <br />
 </p>
 
 <p align="center"><strong>The first Clarity static analyser that finds bugs in your smart contracts
-</strong></p>
+
 
 ### What is Gecko?
 Gecko is an open-source Clarity static analysis tool written in Rust. It detects unsafe input that can lead to vulnearbilities and prints visual information about bug, and provides a web UI to easily test contracts. Developers can test their own contracts or simply input the deployed contracts and Gecko will scan the contract for vulnearbilities, making it useful for both pre and post deployment testing. Gecko enables developers to find vulnerabilities, enhance their code comprehension, and quickly prototype custom analyses while also providing users reasurance that the deployed contract they are interacting with is safe.
