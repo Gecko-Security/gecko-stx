@@ -18,12 +18,12 @@ Gecko is an open-source Clarity static analysis tool written in Rust. It current
 <img width="1508" alt="Screenshot 2024-05-31 at 08 04 52" src="https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/f2a983a0-67a5-4a57-905b-42a764142673">
 <img width="1510" alt="Screenshot 2024-05-31 at 08 05 19" src="https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/de7d1ea6-1e00-4875-9f02-7efbaed65592">
 <img width="1509" alt="Screenshot 2024-05-31 at 08 05 29" src="https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/9b81344e-758b-4c5c-a2d1-dd178d0d7796">
-<img width="1512" alt="Screenshot 2024-05-31 at 07 45 39" src="https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/4ace2094-a164-429b-996a-e7e21fea065c">
+<img width="1512" alt="Screenshot 2024-05-31 at 07 45 39" src="https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/f2a17c7f-0487-430f-a6e9-338fd1cf86c4">
 <img width="1512" alt="Screenshot 2024-05-31 at 07 45 58" src="https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/f635405e-01e6-4188-923c-610ebf5d1ace">
 
 
 - Demo (finding vulnearbility in previous zest-protocol contract): https://youtu.be/1UTiEWyAK4Q
-- Deck:
+
 
 ### Features
 Currently Gecko only supports checking for unsafe inputs and for vulnearbilities that occur when `tx-sender` is used for authentication. These were chosen as they were the most common vulnearbilities that can be found in clarity contracts see this [report](https://www.coinfabrik.com/blog/tx-sender-in-clarity-smart-contracts-is-not-adviced/). The full list of vulnerabilities that will be added can be found [here](https://github.com/Gecko-Security/Gecko-Clarity/tree/main?tab=readme-ov-file#vulnerability-detectors). 
