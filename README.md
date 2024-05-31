@@ -33,7 +33,15 @@ Currently Gecko only supports checking for unsafe inputs and for vulnearbilities
 2. We then define a struct called [Gecko](https://github.com/Gecko-Security/Gecko-Clarity/blob/main/static/static/src/main.rs#L63), which implements the [`ast_visitor`](https://doc.rust-lang.org/stable/nightly-rustc/rustc_ast/visit/trait.Visitor.html) crate used to traverse each node and understand the behavior of the code.
 3. Taint analysis is used to track the flow of potentially unsafe data through the program and locate bugs and vulnearbilities. This involves defining the vulnearbility detectors as invariants and tracking the data to ensure it is properly checked or sanitized.
 4. As Gecko traverses the tree it propagates this taint to other nodes that depend on these.
-5. Once the traversal is complete messages are displayed about issues found including the location of the bug in source. 
+5. Once the traversal is complete messages are displayed about issues found including the location of the bug in source.
+
+<p align="center">
+    <br />
+        <img src="https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/05d5d059-2e65-448e-b154-9818a72b3408" width="800" alt=""/></a>
+    <br />
+</p>
+
+
 
 <p align="center">
     <br />
