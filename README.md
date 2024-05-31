@@ -41,6 +41,7 @@ Currently Gecko only supports checking for unsafe inputs and for vulnearbilities
     <br />
 </p>
 
+_Gecko Technical Architecture_
 
 
 <p align="center">
