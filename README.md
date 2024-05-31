@@ -11,7 +11,7 @@
 
 
 ### What is Gecko?
-Gecko is an open-source Clarity static analysis tool written in Rust. It currently detects two vulnerabilities: unsafe inputs and authentication via `tx-sender`. When it finds these vulnerabilities, Gecko provides visual information about the bug. It also features a web UI for easy contract testing. Developers can upload and test their own contracts or input deployed contracts for Gecko to scan. This makes it useful for both pre-deployment and post-deployment testing. Gecko helps developers find vulnerabilities, improve their code comprehension, and quickly prototype custom analyses. Additionally, it reassures users that the deployed contracts they interact with are safe.
+Gecko is an open-source Clarity static analysis tool written in Rust. It currently detects two vulnerabilities: unsafe inputs and authentication via `tx-sender`. When it finds these vulnerabilities, Gecko provides visual information about the bug. It also features a web UI for easy contract testing. Developers can upload and test their own contracts or input deployed contracts for Gecko to scan. This makes it useful for both pre-deployment and post-deployment testing. Gecko helps developers find vulnerabilities and improve their code comprehension. Additionally, it reassures users that the deployed contracts they interact with are safe.
 
 ### Images
 <img width="1510" alt="Screenshot 2024-05-31 at 08 04 45" src="https://github.com/Gecko-Security/Gecko-Clarity/assets/22000925/7b66a7f0-8017-4e7c-93a7-4c3eadb07cb9">
