@@ -10,7 +10,7 @@
 <p align="center"><strong>The first Clarity static analyser that finds bugs in your smart contracts
 
 
-<p align="center"><strong>BETA: http://54.82.146.222/clarity Main Launch https://www.gecko.security/ (Mid July)
+<p align="center"><strong>BETA: http://54.82.146.222/clarity Main Launch: https://www.gecko.security/ (Mid July)
 
 
 ### What is Gecko?
