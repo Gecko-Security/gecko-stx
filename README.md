@@ -1,5 +1,5 @@
 <h1 align="center" style="font-size: 200px;">
-  <strong>GECKO</strong>
+  <strong>Gecko Clarity</strong>
 </h1>
 <p align="center">
     <br />
