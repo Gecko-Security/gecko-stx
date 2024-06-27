@@ -42,3 +42,5 @@ COPY ui /app/ui
 RUN pip3 install -r /app/ui/requirements.txt
 
 EXPOSE 8000
+
+// TODO: Fix for gcc
