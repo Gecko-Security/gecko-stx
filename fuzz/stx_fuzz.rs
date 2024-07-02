@@ -10,11 +10,11 @@ use libafl::{
     Fuzzer,
 };
 use libafl_bolts::tuples::tuple_list;
-use revm_primitives::Bytecode;
+use stx_primitives::Bytecode;
 use tracing::{debug, error, info};
 
 use crate::{
-    evm::{
+    stx::{
         abi::{ABIAddressToInstanceMap, BoxedABI},
         blaz::builder::ArtifactInfoMetadata,
         concolic::{
@@ -23,7 +23,7 @@ use crate::{
         },
         config::Config,
         contract_utils::FIX_DEPLOYER,
-        corpus_initializer::EVMCorpusInitializer,
+        corpus_initializer::stxCorpusInitializer,
         cov_stage::CoverageStage,
         feedbacks::Sha3WrappedFeedback,
         host::{
@@ -37,7 +37,7 @@ use crate::{
             WRITE_MAP,
             WRITE_RELATIONSHIPS,
         },
-        input::{ConciseEVMInput, EVMInput},
+        input::{ConcisestxInput, stxInput},
         middlewares::{
             call_printer::CallPrinter,
             cheatcode::Cheatcode,
@@ -46,7 +46,7 @@ use crate::{
             reentrancy::ReentrancyTracer,
             sha3_bypass::{Sha3Bypass, Sha3TaintAnalysis},
         },
-        minimizer::EVMMinimizer,
+        minimizer::stxMinimizer,
         mutator::FuzzMutator,
         onchain::{flashloan::Flashloan, offchain::OffChainConfig, ChainConfig, OnChain, WHITELIST_ADDR},
         oracles::{
@@ -59,8 +59,8 @@ use crate::{
         },
         presets::ExploitTemplate,
         scheduler::{PowerABIMutationalStage, PowerABIScheduler, UncoveredBranchesMetadata},
-        types::{fixed_address, EVMAddress, EVMFuzzMutator, EVMFuzzState, EVMQueueExecutor, EVMU256},
-        vm::{EVMExecutor, EVMState},
+        types::{fixed_address, stxAddress, stxFuzzMutator, stxFuzzState, stxQueueExecutor, stxU256},
+        vm::{stxExecutor, stxState},
     },
     executor::FuzzExecutor,
     feedback::{CmpFeedback, DataflowFeedback, OracleFeedback},
@@ -71,23 +71,23 @@ use crate::{
 };
 
 #[allow(clippy::type_complexity)]
-pub fn evm_fuzzer(
+pub fn stx_fuzzer(
     config: Config<
-        EVMState,
-        EVMAddress,
+        stxState,
+        stxAddress,
         Bytecode,
         Bytes,
-        EVMAddress,
-        EVMU256,
+        stxAddress,
+        stxU256,
         Vec<u8>,
-        EVMInput,
-        EVMFuzzState,
-        ConciseEVMInput,
-        EVMQueueExecutor,
+        stxInput,
+        stxFuzzState,
+        ConcisestxInput,
+        stxQueueExecutor,
     >,
-    state: &mut EVMFuzzState,
+    state: &mut stxFuzzState,
 ) {
-    info!("\n\n ================ EVM Fuzzer Start ===================\n\n");
+    info!("\n\n ================ stx Fuzzer Start ===================\n\n");
 
     // create work dir if not exists
     let _path = Path::new(config.work_dir.as_str());
@@ -206,7 +206,7 @@ pub fn evm_fuzzer(
         fuzz_host.add_middlewares(Rc::new(RefCell::new(ReentrancyTracer::new())));
     }
 
-    let mut evm_executor: EVMQueueExecutor = EVMExecutor::new(fuzz_host, deployer);
+    let mut stx_executor: stxQueueExecutor = stxExecutor::new(fuzz_host, deployer);
 
     if config.replay_file.is_some() {
         // add coverage middleware for replay
@@ -220,8 +220,8 @@ pub fn evm_fuzzer(
     if !state.has_metadata::<ArtifactInfoMetadata>() {
         state.add_metadata(ArtifactInfoMetadata::new());
     }
-    let mut corpus_initializer = EVMCorpusInitializer::new(
-        &mut evm_executor,
+    let mut corpus_initializer = stxCorpusInitializer::new(
+        &mut stx_executor,
         scheduler.clone(),
         infant_scheduler.clone(),
         state,
@@ -240,7 +240,7 @@ pub fn evm_fuzzer(
         let (has_preset_match, matched_templates, sig_to_addr_abi_map): (
             bool,
             Vec<ExploitTemplate>,
-            HashMap<[u8; 4], (EVMAddress, BoxedABI)>,
+            HashMap<[u8; 4], (stxAddress, BoxedABI)>,
         ) = if !config.preset_file_path.is_empty() {
             let mut sig_to_addr_abi_map = HashMap::new();
             let exploit_templates = ExploitTemplate::from_filename(config.preset_file_path.clone());
@@ -284,15 +284,15 @@ pub fn evm_fuzzer(
         config.work_dir.clone(),
     )));
 
-    evm_executor.host.add_middlewares(cov_middleware.clone());
+    stx_executor.host.add_middlewares(cov_middleware.clone());
 
     state.add_metadata(instance_map);
 
-    evm_executor.host.initialize(state);
+    stx_executor.host.initialize(state);
 
-    // now evm executor is ready, we can clone it
+    // now stx executor is ready, we can clone it
 
-    let evm_executor_ref = Rc::new(RefCell::new(evm_executor));
+    let stx_executor_ref = Rc::new(RefCell::new(stx_executor));
 
     let meta = state.metadata_map_mut().get_mut::<ArtifactInfoMetadata>().unwrap();
     for (addr, build_artifact) in &artifacts.build_artifacts {
@@ -303,7 +303,7 @@ pub fn evm_fuzzer(
         unsafe {
             cov_middleware.deref().borrow_mut().on_insert(
                 None,
-                &mut evm_executor_ref.deref().borrow_mut().host,
+                &mut stx_executor_ref.deref().borrow_mut().host,
                 state,
                 bytecode,
                 *addr,
@@ -321,10 +321,10 @@ pub fn evm_fuzzer(
     let concolic_stage = ConcolicStage::new(
         config.concolic,
         config.concolic_caller,
-        evm_executor_ref.clone(),
+        stx_executor_ref.clone(),
         config.concolic_num_threads,
     );
-    let mutator: EVMFuzzMutator = FuzzMutator::new(infant_scheduler.clone());
+    let mutator: stxFuzzMutator = FuzzMutator::new(infant_scheduler.clone());
 
     state.metadata_map_mut().insert(UncoveredBranchesMetadata::new());
     let std_stage = PowerABIMutationalStage::new(mutator);
@@ -332,7 +332,7 @@ pub fn evm_fuzzer(
     let call_printer_mid = Rc::new(RefCell::new(CallPrinter::new(artifacts.address_to_name.clone())));
 
     let coverage_obs_stage = CoverageStage::new(
-        evm_executor_ref.clone(),
+        stx_executor_ref.clone(),
         cov_middleware.clone(),
         call_printer_mid.clone(),
         config.work_dir.clone(),
@@ -340,11 +340,11 @@ pub fn evm_fuzzer(
 
     let mut stages = tuple_list!(std_stage, concolic_stage, coverage_obs_stage);
 
-    let mut executor = FuzzExecutor::new(evm_executor_ref.clone(), tuple_list!(jmp_observer));
+    let mut executor = FuzzExecutor::new(stx_executor_ref.clone(), tuple_list!(jmp_observer));
 
     #[cfg(feature = "deployer_is_attacker")]
     state.add_caller(&deployer);
-    let infant_feedback = CmpFeedback::new(cmps, infant_scheduler.clone(), evm_executor_ref.clone());
+    let infant_feedback = CmpFeedback::new(cmps, infant_scheduler.clone(), stx_executor_ref.clone());
     let infant_result_feedback = DataflowFeedback::new(reads, writes);
 
     let mut oracles = config.oracle;
@@ -407,12 +407,12 @@ pub fn evm_fuzzer(
     //     file.read_to_string(&mut buf)
     //         .expect("Failed to read state comp oracle file");
 
-    //     let evm_state =
-    // serde_json::from_str::<EVMState>(buf.as_str()).expect("Failed to parse state
+    //     let stx_state =
+    // serde_json::from_str::<stxState>(buf.as_str()).expect("Failed to parse state
     // comp oracle file");
 
     //     let oracle = Rc::new(RefCell::new(StateCompOracle::new(
-    //         evm_state,
+    //         stx_state,
     //         config.state_comp_matching.unwrap(),
     //     )));
     //     oracles.push(oracle);
@@ -452,33 +452,33 @@ pub fn evm_fuzzer(
 
     let objective: OracleFeedback<
         '_,
-        EVMState,
-        revm_primitives::B160,
+        stxState,
+        rstx_primitives::B160,
         Bytecode,
         Bytes,
-        revm_primitives::B160,
-        revm_primitives::ruint::Uint<256, 4>,
+        rstx_primitives::B160,
+        rstx_primitives::ruint::Uint<256, 4>,
         Vec<u8>,
-        EVMInput,
-        FuzzState<EVMInput, EVMState, revm_primitives::B160, revm_primitives::B160, Vec<u8>, ConciseEVMInput>,
-        ConciseEVMInput,
-        EVMQueueExecutor,
-    > = OracleFeedback::new(&mut oracles, &mut producers, evm_executor_ref.clone());
+        stxInput,
+        FuzzState<stxInput, stxState, rstx_primitives::B160, rstx_primitives::B160, Vec<u8>, ConcisestxInput>,
+        ConcisestxInput,
+        stxQueueExecutor,
+    > = OracleFeedback::new(&mut oracles, &mut producers, stx_executor_ref.clone());
     let wrapped_feedback = ConcolicFeedbackWrapper::new(Sha3WrappedFeedback::new(
         feedback,
         sha3_taint,
-        evm_executor_ref.clone(),
+        stx_executor_ref.clone(),
         config.sha3_bypass,
     ));
 
-    let mut fuzzer: GeckoFuzzer<_, _, _, _, _, _, _, _, _, _, _, _, _, _, EVMMinimizer> = GeckoFuzzer::new(
+    let mut fuzzer: GeckoFuzzer<_, _, _, _, _, _, _, _, _, _, _, _, _, _, stxMinimizer> = GeckoFuzzer::new(
         scheduler,
         infant_scheduler,
         wrapped_feedback,
         infant_feedback,
         infant_result_feedback,
         objective,
-        EVMMinimizer::new(evm_executor_ref.clone()),
+        stxMinimizer::new(stx_executor_ref.clone()),
         config.work_dir,
     );
 
@@ -502,7 +502,7 @@ pub fn evm_fuzzer(
                 if txn.len() < 4 {
                     continue;
                 }
-                let deserialized_tx = serde_json::from_slice::<ConciseEVMInput>(txn.as_bytes());
+                let deserialized_tx = serde_json::from_slice::<ConcisestxInput>(txn.as_bytes());
                 if deserialized_tx.is_err() {
                     error!("Failed to deserialize file: {:?}", file);
                     continue 'process_file;
@@ -518,7 +518,7 @@ pub fn evm_fuzzer(
             if let Some(onchain_mid) = onchain_middleware.clone() {
                 onchain_mid.borrow_mut().load_code(
                     $txn.contract,
-                    &mut evm_executor_ref.clone().deref().borrow_mut().host,
+                    &mut stx_executor_ref.clone().deref().borrow_mut().host,
                     false,
                     true,
                     false,
@@ -565,7 +565,7 @@ pub fn evm_fuzzer(
             }
 
             let printer = Rc::new(RefCell::new(CallPrinter::new(artifacts.address_to_name.clone())));
-            evm_executor_ref.borrow_mut().host.add_middlewares(printer.clone());
+            stx_executor_ref.borrow_mut().host.add_middlewares(printer.clone());
 
             for testcase in testcases {
                 let mut vm_state = initial_vm_state.clone();
