@@ -9,9 +9,7 @@ use libafl::{
     Evaluator,
     Fuzzer,
 };
-use libafl_bolts::tuples::tuple_list;
-use stx_primitives::Bytecode;
-use tracing::{debug, error, info};
+
 
 use crate::{
     stx::{
