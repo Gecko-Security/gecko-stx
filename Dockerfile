@@ -1,46 +1,18 @@
-FROM rust:buster as run_environment
-RUN apt-get update && apt-get install -y \
-    curl \
-    jq \
-    python3 \
-    python3-pip \
-    python3-setuptools \
-    python3-wheel \
-    python3-venv libz3-dev libssl-dev \
-    && rm -rf /var/lib/apt/lists/*
-RUN pip3 install --upgrade pip
-RUN mkdir /bins
+FROM python:3.10
 
-FROM run_environment as build_environment
-RUN apt-get update && apt-get install -y clang pkg-config cmake \
-    && rm -rf /var/lib/apt/lists/*
-
-FROM build_environment as builder
-WORKDIR /builder
-
-COPY Cargo.toml .
-COPY Cargo.lock .
-COPY rust-toolchain.toml .
-COPY src ./src
-COPY benches ./benches
-
-RUN cargo build --release
-RUN cp target/release/gecko /bins/cli_offchain
-
-
-RUN cargo build --release
-RUN cp target/release/gecko /bins/cli_onchain
-
-FROM run_environment
+# Set the working directory in the container
 WORKDIR /app
-COPY --from=builder /bins /bins
 
-WORKDIR /bins
-COPY tests /bins/tests
+# Assuming you're copying the requirements.txt file to the container
+COPY requirements.txt .
 
-COPY ui /app/ui
-RUN pip3 install -r /app/ui/requirements.txt
+# Install Python packages within the virtual environment
+RUN pip install -r requirements.txt
 
-EXPOSE 8000
+# Define environment variable for OpenAI API Key
+ENV OPENAI_API_KEY YourOpenAIKeyHere
 
-// TODO: Fix for gcc
+# Expose port 7860
+EXPOSE 7860
+
+CMD ["/bin/bash"]

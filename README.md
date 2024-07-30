@@ -89,3 +89,10 @@ TODO:
 |                   | race condition                                                                             | Example shows the interaction between the burning of USDA tokens and the subsequent adjustment of the fragments-per-token variable in the liquidity contract results in lost rewards for the users. Example: [Arkadiko](https://github.com/arkadiko-dao/arkadiko/blob/cbb0ed52fd06780f3d167e94138a6ad51b44cc44/clarity/contracts/vaults-v2/arkadiko-vaults-pool-liq-v1-1.clar#L240)                             |
 |                   | free front-running                                                                         | Example shows fees are charged when minting USDA through `open-vault()` or `update-vault()`, if the user adds collateral to the vault. The minting fee is set in the function `set-mint-fee()`. Example: [Arkadiko](https://github.com/arkadiko-dao/arkadiko/blob/cbb0ed52fd06780f3d167e94138a6ad51b44cc44/clarity/contracts/vaults-v2/arkadiko-vaults-operations-v1-1.clar#L73)                                |
 |                   | 'admin' access                                                                             | [ALEX](https://github.com/alexgo-io/alex-v1/blob/dev/clarity/contracts/pool/amm-swap-pool-v1-1.clar)                                                                                                                                                                                                                                                                                                                                                                                                            |
+
+## Acknowledgments
+Thanks to [Coinfabrik](https://www.coinfabrik.com/) for their outstanding work on [tree-sitter-clarity](https://github.com/xlittlerag/tree-sitter-clarity). Their efforts have significantly contributed to the development and functionality of Gecko, as our project now integrates this valuable tool. 
+
+
+
+
